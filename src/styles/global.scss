@@ -1,0 +1,804 @@
+// --- Google Fonts ---
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap");
+
+// --- PB&J Colors ---
+// Jelly (purple-forward)
+$jelly-50: #F9F5FC;
+$jelly-100: #E9DFF7;
+$jelly-300: #B58EE3;
+$jelly-500: #7A3EB1; // primary brand
+$jelly-700: #4E237A;
+$jelly-900: #2E1547;
+
+// Peanut Butter (secondary)
+$pb-50: #FDF8F3;
+$pb-100: #F6E7D7;
+$pb-300: #D9A96F;
+$pb-500: #B97838; // secondary brand
+$pb-700: #7A4C1E;
+$pb-900: #4A2A0E;
+
+// Bread (neutrals / backgrounds)
+$bread-50: #FDFDFB;
+$bread-100: #F2EDE6;
+$bread-300: #D5CFC3;
+$bread-500: #A79F90;
+$bread-700: #6B6357;
+$bread-900: #3A352E;
+
+// Accents
+$accent-strawberry: #C72B3F;
+$accent-honey: #E7B43D;
+$accent-grape-pop: #9B30FF;
+
+// System-level aliases
+$color-primary: $jelly-500;
+$color-primary-hover: $jelly-700;
+$color-secondary: $pb-500;
+$color-bg: $bread-50;
+$color-bg-alt: $bread-100;
+$color-text: $bread-900;
+$color-text-light: $bread-50;
+
+// --- Utilities ---
+.bread-layer {
+  background: $bread-100;
+  border-color: $bread-300;
+}
+
+// --- Base styles ---
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", Inter, system-ui, Arial, sans-serif;
+  margin: 0;
+  color: $color-text;
+  background: $color-bg;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.brand a {
+  font-family: "Outfit", Inter, system-ui, sans-serif;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+main {
+  min-height: calc(100vh - 76px);
+}
+
+// --- Header (with frosted glass + scroll effect) ---
+.site-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 30;
+  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+
+  // Transparent default state (frosted glass look)
+  background: rgba($bread-50, 0);
+  border-bottom: 1px solid transparent;
+  backdrop-filter: blur(0px);
+
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+
+    &.container {
+      padding: 12px;
+    }
+  }
+
+  .brand {
+    a {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: $color-primary;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $color-primary-hover;
+      }
+    }
+
+    .amp {
+      color: $accent-honey;
+    }
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    list-style: none;
+
+    a {
+      text-decoration: none;
+      color: $accent-honey;
+      padding: 12px;
+      position: relative;
+      font-weight: 500;
+      transition: color 0.3s ease;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 6px;
+        width: 0%;
+        height: 2px;
+        background: $accent-honey;
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: $color-primary;
+
+        &::after {
+          width: 100%;
+        }
+      }
+
+      &.active {
+        color: $color-primary;
+        font-weight: 600;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .burger {
+    display: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    width: 28px;
+    height: 22px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    z-index: 50;
+    position: relative;
+
+    span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      margin: 4px 0;
+      background: $color-primary;
+      border-radius: 3px;
+      transition: 0.4s;
+    }
+
+    &.open {
+      span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+      }
+
+      span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+    }
+  }
+
+  &.scrolled {
+    background: rgba($bread-100, 0.9);
+    border-bottom: 1px solid $bread-300;
+    backdrop-filter: blur(12px);
+
+    .main-nav {
+      a {
+        color: $bread-700
+      }
+    }
+
+    .brand {
+      color: $bread-700
+    }
+  }
+}
+
+// --- Sections ---
+.section {
+  padding: 72px 0;
+
+  &.dark {
+    background: $color-bg-alt;
+  }
+
+  &.berry {
+    background: $accent-strawberry;
+  }
+
+  &.honey {
+    background: $accent-honey;
+  }
+
+  &.butter {
+    background: $pb-100;
+  }
+
+  &.light-spread {
+    background: $jelly-300;
+  }
+
+  &.pop {
+    background: $accent-grape-pop;
+  }
+}
+
+
+.about-carousel img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.about-card {
+  background: rgba($accent-grape-pop, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 16px;
+
+  h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: white;
+  }
+
+  p {
+    margin: 0.5rem 0 0;
+    color: white;
+    line-height: 1.4;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid $bread-300;
+}
+
+// --- Hero ---
+.hero {
+  padding: 128px 0;
+  background: linear-gradient(180deg, $color-bg 0%, $jelly-300 100%);
+
+  h1 {
+    font-size: 120px;
+    margin: auto 0 12px;
+
+    @media only screen and (max-width: 768px) {
+      font-size: 64px;
+    }
+  }
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-img img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.section.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 50vh;
+}
+
+.particle-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  mix-blend-mode: overlay;
+}
+
+.hero-content {
+  z-index: 1;
+  position: relative;
+  margin-top: 5%;
+}
+
+.particle-ring-wrapper {
+  position: absolute;
+  /* so it can sit behind content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* match parent container */
+  z-index: 0;
+  /* push behind */
+}
+
+.particle-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+
+
+// --- Pricing ---
+.pricing {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+
+  .price {
+    flex: 1;
+    min-width: 180px;
+    padding: 16px;
+    border: 1px dashed $bread-300;
+    border-radius: 10px;
+  }
+}
+
+// --- Buttons ---
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: $color-primary;
+  color: $color-text-light;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+
+  &.ghost {
+    background: transparent;
+    border: 1px solid $color-primary;
+    color: $color-primary;
+  }
+}
+
+.button-group {
+  display: flex;
+
+  .btn {
+    &:not(:first-of-type) {
+      margin-left: 8px;
+    }
+  }
+}
+
+// --- Contact Form ---
+.contact-form {
+  display: grid;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    color: $bread-700;
+
+    span {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+  }
+
+  input,
+  textarea {
+    padding: 14px 16px;
+    border: 1px solid $bread-300;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: $bread-50;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba($jelly-300, 0.3);
+      outline: none;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .btn {
+    margin-top: 10px;
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, $color-primary, $jelly-300);
+    border: none;
+
+    &:hover {
+      background: linear-gradient(135deg, $color-primary-hover, $jelly-500);
+    }
+  }
+}
+
+
+// --- Footer ---
+.site-footer {
+  @extend .bread-layer;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+
+  p {
+    margin: 0.3rem 0;
+  }
+}
+
+// --- Responsive ---
+/* Mobile / small screens: sliding right drawer + backdrop */
+@media (max-width: 800px) {
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    /* header sits above page content */
+
+    .header-inner {
+      height: 76px;
+      /* matches header height used elsewhere */
+    }
+
+    /* Burger must sit above everything so it's clickable & visible */
+    .burger {
+      display: flex;
+      z-index: 1003;
+      position: relative;
+    }
+
+    /* Sliding drawer nav */
+    .main-nav {
+      position: fixed;
+      top: 76px;
+      /* start just under the header */
+      right: 0;
+      width: 300px;
+      height: calc(100% - 76px);
+      background: $bread-50;
+      border-left: 1px solid $bread-300;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(.2, .9, .2, 1), opacity 0.28s ease;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1002;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+
+      li {
+        width: 100%;
+      }
+
+      a {
+        display: block;
+        padding: 10px 6px;
+        font-size: 1.05rem;
+        color: $bread-900;
+        text-decoration: none;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+
+      /* when JS toggles `.open` */
+      &.open {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    /* Backdrop that sits under the nav but above content */
+    .nav-backdrop {
+      position: fixed;
+      top: 76px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 1001;
+    }
+  }
+}
+
+
+.testimonies-section {
+  * {
+    color: white
+  }
+}
+
+.pricing-section {
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+  }
+
+  .pricing-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+
+    &.popular {
+      border: 2px solid $pb-700;
+      position: relative;
+
+      &::before {
+        content: "Popular";
+        position: absolute;
+        top: -12px;
+        right: 16px;
+        background: $pb-700;
+        color: #fff;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+      }
+    }
+
+    .plan-name {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+
+      .currency {
+        font-size: 1.25rem;
+        vertical-align: top;
+      }
+
+      .per {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #555;
+      }
+
+      &.custom {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+
+    .features {
+      h4 {
+        font-size: 0.85rem;
+        color: #555;
+        margin-bottom: 0.5rem;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          display: flex;
+          align-items: center;
+          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+
+          &::before {
+            content: "✔";
+            color: $accent-grape-pop;
+            font-weight: bold;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.contact-section {
+  background: linear-gradient(to right, #f9fafb, #f3f4f6);
+  padding: 80px 20px;
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    color: #555;
+  }
+
+  .contact-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+
+    .info-card {
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 20px;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+      strong {
+        display: block;
+        margin-top: 5px;
+        font-weight: 600;
+      }
+
+      span {
+        display: block;
+        margin-top: 5px;
+        color: #333;
+      }
+
+      a {
+        color: #0077ff;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .contact-info {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+// --- Careers Page ---
+.card,
+.career-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid $bread-300;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    border-color: $color-primary;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: $color-primary;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: $bread-700;
+    line-height: 1.5;
+    margin: 0 0 1rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+}
+
+.careers {
+  background: $bread-50;
+
+  .careers-title {
+    font-size: 2.5rem;
+    color: $color-primary;
+    margin-bottom: 1rem;
+  }
+
+  .careers-intro {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-bottom: 2.5rem;
+    color: $bread-700;
+  }
+
+  .careers-subtitle {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: $pb-700;
+  }
+
+  .careers-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+}
