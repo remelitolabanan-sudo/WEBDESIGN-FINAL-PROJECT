@@ -1,3 +1,3 @@
-const PROJECT_NAME = `PBJ Automations Inc.`;
+const PROJECT_NAME = ` AUTOMEL Automation Inc.`;
 
 export { PROJECT_NAME };
