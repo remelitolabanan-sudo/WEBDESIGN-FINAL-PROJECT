@@ -4,6 +4,11 @@ import Seo from "../components/Seo";
 import Slider from "react-slick";
 import ParticleRing from "../components/ParticleRing";
 import companyImage from "../images/M1.jpg";
+import companyImage2 from "../images/M2.jpg";
+import companyImage3 from "../images/M3.jpg";
+
+
+
 
 const testimonials = [
   {
@@ -150,6 +155,12 @@ export default function IndexPage() {
                   alt="Company Meetings"
                 />
               </div>
+              <div>
+            <img src={companyImage2} alt="Company Meeting 2" />
+             </div>
+               <div>
+    <img src={companyImage3} alt="Company Meeting 3" />
+             </div>
             </Slider>
           </div>
 
